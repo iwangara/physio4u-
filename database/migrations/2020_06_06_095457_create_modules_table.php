@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDetailsToUsers extends Migration
+class CreateModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddDetailsToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->nullable();
+        Schema::create('modules', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->unique();
             $table->string('created_by')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ class AddDetailsToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('phone');
-            $table->dropColumn('created_by');
-        });
+        Schema::dropIfExists('modules');
     }
 }

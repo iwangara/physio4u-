@@ -16,7 +16,8 @@
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0",
-        "spatie/laravel-permission": "^3.3"
+        "spatie/laravel-permission": "^3.3",
+        "spatie/laravel-tags": "^2.6"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

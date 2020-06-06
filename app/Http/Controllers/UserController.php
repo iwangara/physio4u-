@@ -31,7 +31,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','id');
-        return view('users.create',compact('roles'));
+        $password = str_random(8);
+        return view('users.create',compact('roles','password'));
     }
 
     /**
@@ -43,8 +44,10 @@ class UserController extends Controller
      */
     public function store(UserRequest $request, User $model)
     {
+
 //        hash password
         $request->merge(['password' => Hash::make($request->get('password'))]);
+        $request->request->add(['created_by' => auth()->user()->name]);
         if($user = User::create($request->except('roles','permissions'))){
             $this->syncPermissions($request,$user);
             return redirect()->route('users.index')->withStatus(__('User successfully created.'));
@@ -52,9 +55,7 @@ class UserController extends Controller
         else{
             return redirect()->route('users.index')->withStatus(__('Unable to create users.'));
         }
-//        $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
 
-//        return redirect()->route('users.index')->withStatus(__('User successfully created.'));
     }
 
     /**
@@ -82,6 +83,7 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'bail|required|min:2',
+            'phone'=>'required|min:9',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:6|confirmed',
             'roles' => 'required|min:1'

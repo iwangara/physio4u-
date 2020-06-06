@@ -55,6 +55,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Phone') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                            <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" id="input-phone" type="text" placeholder="{{ __('+254722000000') }}" value="{{ old('phone') }}" required />
+                                            @if ($errors->has('phone'))
+                                                <span id="phone-error" class="error text-danger" for="input-phone">{{ $errors->first('phone') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('User Type') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('roles') ? ' has-danger' : '' }}">
@@ -72,7 +83,7 @@
                                     <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Password') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" input type="password" name="password" id="input-password" placeholder="{{ __('Password') }}" value="" required />
+                                            <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" input type="password" name="password" id="input-password" placeholder="{{ __('Password') }}" value="{{$password}}" required />
                                             @if ($errors->has('password'))
                                                 <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('password') }}</span>
                                             @endif
@@ -83,8 +94,9 @@
                                     <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Confirm Password') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group">
-                                            <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirm Password') }}" value="" required />
+                                            <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirm Password') }}" value="{{$password}}" required />
                                         </div>
+                                        <input name="pass" type="hidden" value="{{$password}}">
                                     </div>
                                 </div>
                             </div>

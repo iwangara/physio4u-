@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'pi-management', 'titlePage' => __('Project Installers Management')])
+@extends('layouts.app', ['activePage' => 'parts-management', 'titlePage' => __('Body Parts Management')])
 
 @section('content')
     <div class="content">
@@ -7,8 +7,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{ $installers->total() }}Project {{str_plural(' Installer',$installers->count())}}</h4>
-                            <p class="card-category"> {{ __('Here you can manage Project Installers(Companies not individuals,for the latter use personnel)') }}</p>
+                            <h4 class="card-title ">{{ $parts->total() }} {{str_plural('Part',$parts->count())}}</h4>
+                            <p class="card-category"> {{ __('Here you can manage Body Parts(Example Jaw,Chest )') }}</p>
                         </div>
                         <div class="card-body">
                             @if (session('status'))
@@ -25,8 +25,8 @@
                             @endif
                             <div class="row">
                                 <div class="col-12 text-right">
-                                    @can('add_installers')
-                                        <a href="{{ route('installers.create') }}" class="btn btn-sm btn-primary">{{ __('Add Installer') }}</a>
+                                    @can('add_parts')
+                                        <a href="{{ route('parts.create') }}" class="btn btn-sm btn-primary">{{ __('Add Part') }}</a>
                                     @endcan
                                 </div>
                             </div>
@@ -39,56 +39,45 @@
                                     <th>
                                         {{ __('Name') }}
                                     </th>
-                                    <th>
-                                        {{ __('Address') }}
-                                    </th>
-                                    <th>
-                                        {{ __('Phone number') }}
-                                    </th>
+
+                                    
                                     
                                     <th>
                                         {{ __('Added by') }}
                                     </th>
                                     <th class="text-right">
-                                        @can('edit_installers','delete_installers')
+                                        @can('edit_parts','delete_parts')
                                             {{ __('Actions') }}
                                         @endcan
                                     </th>
                                     </thead>
                                     <tbody>
-                                    @if($installers->total()>0)
-                                        @foreach($installers as $index=>$installer)
+                                    @if($parts->total()>0)
+                                        @foreach($parts as $index=>$part)
                                             <tr>
                                                 <td>
                                                     <strong>{{ $index+1 }}.</strong>
                                                 </td>
                                                 <td>
-                                                    {{ $installer->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $installer->address }}
+                                                    {{ $part->name }}
                                                 </td>
 
                                                 <td>
-                                                    {{ $installer->phone }}
-                                                </td>
-
-                                                <td>
-                                                    {{ $installer->added_by }}
+                                                    {{ $part->created_by }}
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    {{--                              @include('shared._actions', ['entity' => 'installers','id'=>$installer->id])--}}
+                                                    {{--                              @include('shared._actions', ['entity' => 'parts','id'=>$part->id])--}}
 
-                                                    <form action="{{ route('installers.destroy', $installer) }}" method="post">
+                                                    <form action="{{ route('parts.update', $part) }}" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        @can('edit_installers')
-                                                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('installers.edit', $installer) }}" data-original-title="" title="">
+                                                        @can('edit_parts')
+                                                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('parts.edit', $part) }}" data-original-title="" title="">
                                                                 <i class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         @endcan
-                                                        @can('delete_installers')
+                                                        @can('delete_parts')
                                                             <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
                                                                 <i class="material-icons">close</i>
                                                                 <div class="ripple-container"></div>
@@ -100,10 +89,10 @@
 
                                             </tr>
                                         @endforeach
-                                        {{$installers->links()}}
+                                        {{$parts->links()}}
                                     @else
                                         <td>
-                                            <p>No installers created at the moment</p>
+                                            <p>No parts created at the moment</p>
                                         </td>
                                     @endif
                                     </tbody>

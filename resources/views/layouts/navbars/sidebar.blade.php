@@ -6,7 +6,7 @@
   -->
   <div class="logo">
     <a href="#" class="simple-text logo-normal">
-      {{ __('SIP') }}
+      {{ __('PHYSIO4U') }}
     </a>
   </div>
   <div class="sidebar-wrapper">
@@ -20,7 +20,7 @@
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
-          <p>{{ __('Account') }}
+          <p>{{ __('Management') }}
             <b class="caret"></b>
           </p>
         </a>
@@ -48,6 +48,14 @@
                   </a>
               </li>
                   @endcan
+              @can('add_modules','edit_modules', 'module_roles')
+                  <li class="nav-item{{ $activePage == 'modules-management' ? ' active' : '' }}">
+                      <a class="nav-link" href="{{ route('modules.index') }}">
+                          <span class="sidebar-mini"> MM </span>
+                          <span class="sidebar-normal"> {{ __('Modules Management') }} </span>
+                      </a>
+                  </li>
+              @endcan
           </ul>
         </div>
       </li>

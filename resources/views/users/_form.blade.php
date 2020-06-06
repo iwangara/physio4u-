@@ -2,6 +2,11 @@
 <div class="card">
     <div class="card-header card-header-primary">
         <h4 class="card-title">{{ __('Edit User') }}</h4>
+        <div class="col-12 text-right">
+
+                <a href="{{ route('users.index') }}" class="btn btn-sm btn-secondary">{{ __('Back') }}</a>
+
+        </div>
         <p class="card-category"></p>
     </div>
     <div class="card-body ">
@@ -23,6 +28,18 @@
 
                     {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) !!}
                     @if ($errors->has('email')) <p class="error text-danger">{{ $errors->first('email') }}</p> @endif
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label class="col-sm-2 col-form-label">{{ __('Phone') }}</label>
+            <div class="col-sm-7">
+                <div class="form-group @if ($errors->has('phone')) has-error @endif">
+
+                    {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => 'Phone']) !!}
+                    @if ($errors->has('phone')) <p class="error text-danger">{{ $errors->first('phone') }}</p> @endif
                 </div>
             </div>
         </div>

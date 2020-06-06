@@ -40,7 +40,13 @@
                                         {{ __('Email') }}
                                     </th>
                                     <th>
+                                        {{ __('Phone') }}
+                                    </th>
+                                    <th>
                                         {{ __('Role') }}
+                                    </th>
+                                    <th>
+                                        {{ __('Registered by') }}
                                     </th>
                                     <th>
                                         {{ __('Creation date') }}
@@ -61,7 +67,13 @@
                                                 {{ $user->email }}
                                             </td>
                                             <td>
+                                                {{ $user->phone }}
+                                            </td>
+                                            <td>
                                                 {{ $user->roles->implode('name',', ') }}
+                                            </td>
+                                            <td>
+                                                {{ $user->created_by }}
                                             </td>
                                             <td>
                                                 {{ $user->created_at->toFormattedDateString() }}
