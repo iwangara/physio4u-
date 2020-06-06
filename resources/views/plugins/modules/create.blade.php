@@ -16,7 +16,7 @@
 
 
                                 <h4 class="card-title">{{ __('Add a module') }}</h4>
-                                <p class="card-category"></p>
+                                <p class="card-category"> {{ __('You can separate them using a comma e.g Aquatherapy,Orthopaedics') }}</p>
                             </div>
                             <div class="card-body ">
                                 <div class="row">

@@ -26,6 +26,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('modules', 'ModulesController');
     Route::resource('parts', 'BodyPartsController');
+    Route::resource('movements', 'MovementsController');
+    Route::resource('objectives', 'ObjectivesController');
+    Route::resource('equipments', 'EquipmentsController');
+    Route::resource('muscles', 'MusclesController');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

@@ -42,10 +42,15 @@ class ModulesController extends Controller
             'name' => 'required|min:3',
 
         );
+
         $this->validate($request, $rules);
         $data = request()->except(['_token', '_method']);
-        $data['created_by'] = auth()->user()->name;
-        Modules::create($data);
+        $names =explode(",",$request->name);
+        foreach ($names as $name){
+            $data['created_by'] = auth()->user()->name;
+            $data ['name'] =$name;
+            Modules::create($data);
+        }
 
         return redirect()->route('modules.index')->withStatus(__('Module successfully created.'));
     }

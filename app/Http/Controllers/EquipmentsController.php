@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\BodyParts;
-
-use Illuminate\Http\Request;
 use App\Authorizable;
-class BodyPartsController extends Controller
+use App\Equipments;
+use Illuminate\Http\Request;
+
+class EquipmentsController extends Controller
 {
     use Authorizable;
     /**
@@ -14,9 +14,9 @@ class BodyPartsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BodyParts $model)
+    public function index(Equipments $model)
     {
-        return view('plugins.parts.index', ['parts' => $model->paginate(15)]);
+        return view('plugins.equipments.index', ['equipments' => $model->paginate(15)]);
     }
 
     /**
@@ -26,7 +26,7 @@ class BodyPartsController extends Controller
      */
     public function create()
     {
-        return view('plugins.parts.create');
+        return view('plugins.equipments.create');
     }
 
     /**
@@ -38,30 +38,29 @@ class BodyPartsController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'name' => 'required|min:3',
+            'name' => 'unique:equipments,name|required|min:3',
 
         );
+
         $this->validate($request, $rules);
         $data = request()->except(['_token', '_method']);
         $names =explode(",",$request->name);
         foreach ($names as $name){
             $data['created_by'] = auth()->user()->name;
             $data ['name'] =$name;
-            BodyParts::create($data);
+            Equipments::create($data);
         }
 
-
-
-        return redirect()->route('parts.index')->withStatus(__('Body part successfully created.'));
+        return redirect()->route('equipments.index')->withStatus(__('Equipment(s) successfully created.'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\BodyParts  $bodyParts
+     * @param  \App\Equipments  $equipments
      * @return \Illuminate\Http\Response
      */
-    public function show(BodyParts $bodyParts)
+    public function show(Equipments $equipments)
     {
         //
     }
@@ -69,20 +68,20 @@ class BodyPartsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BodyParts  $bodyParts
+     * @param  \App\Equipments  $equipments
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $parts =BodyParts::findorFail($id);
-        return view('plugins.parts.update',compact('parts'));
+        $equipments =Equipments::findorFail($id);
+        return view('plugins.equipments.update',compact('equipments'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BodyParts  $bodyParts
+     * @param  \App\Equipments  $equipments
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,20 +95,20 @@ class BodyPartsController extends Controller
         $data = request()->except(['_token','_method']);
         $data['created_by']=auth()->user()->name;
 //
-        BodyParts::whereId($id)->update($data);
-        return redirect()->route('parts.index')->withStatus(__('Module successfully updated.'));
+        Equipments::whereId($id)->update($data);
+        return redirect()->route('equipments.index')->withStatus(__('Equipment successfully updated.'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BodyParts  $bodyParts
+     * @param  \App\objectives  $objectives
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $parts =BodyParts::findOrFail($id);
-        $parts->delete();
-        return redirect()->route('parts.index')->withStatus(__('Body part successfully deleted.'));
+        $modules =Equipments::findOrFail($id);
+        $modules->delete();
+        return redirect()->route('equipments.index')->withStatus(__('Equipment(s) successfully deleted.'));
     }
 }
