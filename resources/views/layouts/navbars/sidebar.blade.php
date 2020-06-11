@@ -115,6 +115,30 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item {{ ($activePage == 'exercises' || $activePage == 'exercises-management') ? ' active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="#exerciseExample" aria-expanded="true">
+                <i class="material-icons">run_circle</i>
+                <p>{{ __('Exercises Management') }}
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse " id="exerciseExample">
+                <ul class="nav">
+
+
+
+                    @can('add_exercises','edit_exercises', 'delete_exercises')
+                        <li class="nav-item{{ $activePage == 'exercises-management' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('exercises.index') }}">
+                                <span class="sidebar-mini"> EM </span>
+                                <span class="sidebar-normal"> {{ __('exercises Management') }} </span>
+                            </a>
+                        </li>
+                    @endcan
+
+                </ul>
+            </div>
+        </li>
     </ul>
   </div>
 </div>
