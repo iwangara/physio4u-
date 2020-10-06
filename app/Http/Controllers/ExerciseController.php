@@ -7,7 +7,7 @@ use App\Exercise;
 use Illuminate\Http\Request;
 use makbari\validator\rules;
 use App\Equipments;
-
+use App\Projects;
 
 class ExerciseController extends Controller
 {
@@ -19,8 +19,23 @@ class ExerciseController extends Controller
      */
     public function index(Exercise $model)
     {
-        $exercises = Exercise::paginate(10);
-        return  view('plugins.exercises.index',compact('exercises'));
+        $role =auth()->user()->roles->implode('name',', ');
+
+        if ($role=='Client'){
+            $exercise_ids =Projects::where('user_id','=',auth()->user()->id)->get(['status','exercise_id']);
+            $exercises = array();
+            foreach($exercise_ids as $patient){
+                $response = Exercise::where('id',$patient->exercise_id)->paginate(10);
+                $exercises = $response;
+            }
+//            return $exercises;
+            return  view('plugins.exercises.index',compact('exercises'));
+        }else{
+                    $exercises = Exercise::paginate(10);
+        return view('plugins.exercises.index',compact('exercises'));
+        }
+
+
     }
 
     /**

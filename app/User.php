@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Patients::class,'user_id');
     }
+
+    public function project()
+    {
+        return $this->hasMany(Projects::class,'user_id');
+    }
 }

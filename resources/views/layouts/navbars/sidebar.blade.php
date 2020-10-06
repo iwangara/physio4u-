@@ -17,6 +17,7 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
 {{--          <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>--}}<i class="material-icons">account_box</i>
@@ -52,6 +53,7 @@
           </ul>
         </div>
       </li>
+        @can('view_users')
         <li class="nav-item {{ ($activePage == 'modules' || $activePage == 'modules-management') ? ' active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#moduleExample" aria-expanded="true">
                           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
@@ -139,7 +141,37 @@
                 </ul>
             </div>
         </li>
+@endcan
 
+@if(Auth::user()->roles->implode('name',', ')=='Client')
+
+        <li class="nav-item {{ ($activePage == 'exercises' || $activePage == 'exercises-management') ? ' active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="#patientsExample" aria-expanded="true">
+                <i class="material-icons">medical_services</i>
+                <p>{{ __('My Exercises') }}
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse " id="patientsExample">
+                <ul class="nav">
+
+
+
+{{--                    @can('add_patients','edit_patients', 'delete_patients')--}}
+                    @can('view_exercises','edit_exercises', 'delete_exercises')
+                        <li class="nav-item{{ $activePage == 'exercises-management' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('exercises.index') }}">
+                                <span class="sidebar-mini"> E </span>
+                                <span class="sidebar-normal"> {{ __('Exercises Management') }} </span>
+                            </a>
+                        </li>
+                    @endcan
+{{--                    @endcan--}}
+
+                </ul>
+            </div>
+        </li>
+    @endif
     </ul>
   </div>
 </div>

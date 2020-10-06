@@ -120,8 +120,10 @@
                                                 <h5 class="card-subtitle mb-2 text-muted">Description:  </h5><h6>{{$exercise->description}}</h6>
                                                 <h5 class="card-subtitle mb-2 text-muted">Instruction:</h5>
                                                 <p class="card-text"> {{$exercise->instruction}} .</p>
-{{--                                                <a href="#" class="card-link">Card link</a>--}}
-{{--                                                <a href="#" class="card-link">Another link</a>--}}
+                                                @can('add_exercises')
+                                                <a  href="{{route('add_exercise',$exercise->id)}}"
+                                                   class="btn btn-primary btn-sm">{{ __('Assign a patient') }}</a>
+                                                @endcan
                                             </div>
                                         </div>
                                     </div>
@@ -129,8 +131,7 @@
                             </div>
 
 {{--                            <div class="card-footer ml-auto mr-auto">--}}
-{{--                                <button type="submit" id="add_client"--}}
-{{--                                        class="btn btn-primary">{{ __('Add exercise') }}</button>--}}
+{{--                                --}}
 {{--                            </div>--}}
                         </div>
 

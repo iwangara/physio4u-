@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Authorizable;
+use App\Exercise;
 use App\Patients;
 use App\User;
 use DB;
@@ -134,6 +135,42 @@ class PatientsController extends Controller
         return redirect()->route('patients.index')->withStatus(__('Patient successfully deleted.'));
     }
 
+    public function add_exercise($id)
+    {
+        $patients = Patients::paginate(15);
+
+        $exercise = Exercise::where('id',$id)->get('name')[0]->name;
+//        $exercise = DB::table('exercises')->select('name')->where('id',$id)->get();
+//        return $patients;
+        return view('plugins.exercises.assign',compact('patients','id','exercise'));
+    }
+
+    public function getPatients(Request $request){
+
+        $search = $request->search;
+
+        if($search == ''){
+            $patients = Patients::with('user')->limit(5)->get();
+            $response = array();
+            foreach($patients as $patient){
+                $response[] = array("value"=>$patient->user->id,"label"=>$patient->user->name);
+            }
+
+            return response()->json($response);
+        }else{
+
+            $patients = User::whereHas('patient', function($q) use ($search){
+                $q->where('name', 'like', '%' .$search. '%');
+            })->limit(5)->get();
+            $response = array();
+            foreach($patients as $patient){
+                $response[] = array("value"=>$patient->id,"label"=>$patient->name);
+            }
+
+            return response()->json($response);
+//            $patients = Patients::with('user')->select('id','name')->where('name', 'like', '%' .$search . '%')->limit(5)->get();
+        }
 
 
+    }
 }
