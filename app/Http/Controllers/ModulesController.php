@@ -50,6 +50,7 @@ class ModulesController extends Controller
             $data['created_by'] = auth()->user()->name;
             $data ['name'] =$name;
             Modules::create($data);
+
         }
 
         return redirect()->route('modules.index')->withStatus(__('Module successfully created.'));

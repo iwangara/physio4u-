@@ -16,7 +16,7 @@ class EquipmentsController extends Controller
      */
     public function index(Equipments $model)
     {
-        return view('plugins.equipments.index', ['equipments' => $model->paginate(15)]);
+        return view('plugins.tags.index', ['details' => $model->paginate(15)]);
     }
 
     /**
@@ -26,7 +26,7 @@ class EquipmentsController extends Controller
      */
     public function create()
     {
-        return view('plugins.equipments.create');
+        return view('plugins.tags.create');
     }
 
     /**
@@ -38,20 +38,18 @@ class EquipmentsController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'name' => 'unique:equipments,name|required|min:3',
+            'name' => 'required|min:3',
+            'tags' => 'required|min:3',
 
         );
 
         $this->validate($request, $rules);
-        $data = request()->except(['_token', '_method']);
-        $names =explode(",",$request->name);
-        foreach ($names as $name){
-            $data['created_by'] = auth()->user()->name;
-            $data ['name'] =$name;
-            Equipments::create($data);
-        }
-
-        return redirect()->route('equipments.index')->withStatus(__('Equipment(s) successfully created.'));
+        $data = request()->except(['_token', '_method','tags']);
+        $data['created_by'] = auth()->user()->name;
+        $tags =explode(",",$request->tags);
+        $new = Equipments::updateOrCreate($data);
+        $new->tag($tags);
+        return redirect()->route('details.index')->withStatus(__('Details successfully created.'));
     }
 
     /**
@@ -74,7 +72,7 @@ class EquipmentsController extends Controller
     public function edit($id)
     {
         $equipments =Equipments::findorFail($id);
-        return view('plugins.equipments.update',compact('equipments'));
+        return view('plugins.tags.update',compact('equipments'));
     }
 
     /**
@@ -92,11 +90,15 @@ class EquipmentsController extends Controller
 
         );
         $this->validate($request,$rules);
-        $data = request()->except(['_token','_method']);
+        $data = request()->except(['_token','_method','tags']);
+        $tags =explode(",",$request->tags);
         $data['created_by']=auth()->user()->name;
+        $new = Equipments::updateOrCreate($data);
+        $new->retag($tags);
 //
-        Equipments::whereId($id)->update($data);
-        return redirect()->route('equipments.index')->withStatus(__('Equipment successfully updated.'));
+//        $upd = Equipments::find($id)->update($data);
+//        dd($upd->retag($tags));
+        return redirect()->route('details.index')->withStatus(__('Details successfully updated.'));
     }
 
     /**
@@ -109,6 +111,6 @@ class EquipmentsController extends Controller
     {
         $modules =Equipments::findOrFail($id);
         $modules->delete();
-        return redirect()->route('equipments.index')->withStatus(__('Equipment(s) successfully deleted.'));
+        return redirect()->route('details.index')->withStatus(__('Detail(s) successfully deleted.'));
     }
 }

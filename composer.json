@@ -9,15 +9,19 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "alexusmai/laravel-file-manager": "^2.5",
         "barryvdh/laravel-dompdf": "^0.8.5",
+        "cviebrock/eloquent-taggable": "6.0.2",
         "fideloper/proxy": "^4.0",
         "laravel-frontend-presets/material-dashboard": "^1.0",
         "laravel/framework": "^6.2",
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0",
+        "makbari/media-validator": "^0.2.0",
+        "spatie/laravel-medialibrary": "7.19.3",
         "spatie/laravel-permission": "^3.3",
-        "spatie/laravel-tags": "^2.6"
+        "spatie/laravel-tags": "^2.7"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

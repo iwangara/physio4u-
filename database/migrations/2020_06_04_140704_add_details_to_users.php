@@ -15,6 +15,7 @@ class AddDetailsToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone')->nullable();
+            $table->boolean('registered')->default(false);
             $table->string('created_by')->nullable();
         });
     }

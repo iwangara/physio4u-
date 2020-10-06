@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function client()
+    public function patient()
     {
-        return $this->hasMany(Client::class);
+        return $this->hasOne(Patients::class,'user_id');
     }
 }

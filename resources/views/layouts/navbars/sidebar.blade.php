@@ -72,66 +72,66 @@
                             </a>
                         </li>
                     @endcan
-                    @can('add_parts','edit_parts', 'delete_parts')
-                        <li class="nav-item{{ $activePage == 'parts-management' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('parts.index') }}">
-                                <span class="sidebar-mini"> PM </span>
-                                <span class="sidebar-normal"> {{ __('Body Parts Management') }} </span>
+                    @can('add_details','edit_details', 'delete_details')
+                        <li class="nav-item{{ $activePage == 'details-management' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('details.index') }}">
+                                <span class="sidebar-mini"> T </span>
+                                <span class="sidebar-normal"> {{ __('Details Management') }} </span>
                             </a>
                         </li>
                     @endcan
-                    @can('add_movements','edit_movements', 'delete_movements')
-                        <li class="nav-item{{ $activePage == 'movements-management' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('movements.index') }}">
-                                <span class="sidebar-mini"> MM </span>
-                                <span class="sidebar-normal"> {{ __('Movements Management') }} </span>
+                    @can('add_exercises','edit_exercises', 'delete_exercises')
+                        <li class="nav-item{{ $activePage == 'exercises-management' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('exercises.index') }}">
+                                <span class="sidebar-mini"> E </span>
+                                <span class="sidebar-normal"> {{ __('Exercises Management') }} </span>
                             </a>
                         </li>
                     @endcan
-                        @can('add_objectives','edit_objectives', 'delete_objectives')
-                            <li class="nav-item{{ $activePage == 'objectives-management' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('objectives.index') }}">
-                                    <span class="sidebar-mini"> OM </span>
-                                    <span class="sidebar-normal"> {{ __('Objectives Management') }} </span>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('add_equipments','edit_equipments', 'delete_equipments')
-                            <li class="nav-item{{ $activePage == 'equipments-management' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('equipments.index') }}">
-                                    <span class="sidebar-mini"> EM </span>
-                                    <span class="sidebar-normal"> {{ __('Equipments Management') }} </span>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('add_muscles','edit_muscles', 'delete_muscles')
-                            <li class="nav-item{{ $activePage == 'muscles-management' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('muscles.index') }}">
-                                    <span class="sidebar-mini"> MM </span>
-                                    <span class="sidebar-normal"> {{ __('Muscles Management') }} </span>
-                                </a>
-                            </li>
-                        @endcan
+{{--                        @can('add_objectives','edit_objectives', 'delete_objectives')--}}
+{{--                            <li class="nav-item{{ $activePage == 'objectives-management' ? ' active' : '' }}">--}}
+{{--                                <a class="nav-link" href="{{ route('objectives.index') }}">--}}
+{{--                                    <span class="sidebar-mini"> OM </span>--}}
+{{--                                    <span class="sidebar-normal"> {{ __('Objectives Management') }} </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
+{{--                        @can('add_equipments','edit_equipments', 'delete_equipments')--}}
+{{--                            <li class="nav-item{{ $activePage == 'details-management' ? ' active' : '' }}">--}}
+{{--                                <a class="nav-link" href="{{ route('details.index') }}">--}}
+{{--                                    <span class="sidebar-mini"> EM </span>--}}
+{{--                                    <span class="sidebar-normal"> {{ __('Equipments Management') }} </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
+{{--                        @can('add_muscles','edit_muscles', 'delete_muscles')--}}
+{{--                            <li class="nav-item{{ $activePage == 'muscles-management' ? ' active' : '' }}">--}}
+{{--                                <a class="nav-link" href="{{ route('muscles.index') }}">--}}
+{{--                                    <span class="sidebar-mini"> MM </span>--}}
+{{--                                    <span class="sidebar-normal"> {{ __('Muscles Management') }} </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
                 </ul>
             </div>
         </li>
-        <li class="nav-item {{ ($activePage == 'exercises' || $activePage == 'exercises-management') ? ' active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="#exerciseExample" aria-expanded="true">
-                <i class="material-icons">run_circle</i>
-                <p>{{ __('Exercises Management') }}
+        <li class="nav-item {{ ($activePage == 'patients' || $activePage == 'patients-management') ? ' active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="#patientsExample" aria-expanded="true">
+                <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
+                <p>{{ __('Patients Management') }}
                     <b class="caret"></b>
                 </p>
             </a>
-            <div class="collapse " id="exerciseExample">
+            <div class="collapse " id="patientsExample">
                 <ul class="nav">
 
 
 
-                    @can('add_exercises','edit_exercises', 'delete_exercises')
-                        <li class="nav-item{{ $activePage == 'exercises-management' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('exercises.index') }}">
-                                <span class="sidebar-mini"> EM </span>
-                                <span class="sidebar-normal"> {{ __('exercises Management') }} </span>
+                    @can('add_patients','edit_patients', 'delete_patients')
+                        <li class="nav-item{{ $activePage == 'patients-management' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('patients.index') }}">
+                                <span class="sidebar-mini"> MM </span>
+                                <span class="sidebar-normal"> {{ __('Patients Management') }} </span>
                             </a>
                         </li>
                     @endcan
@@ -139,6 +139,7 @@
                 </ul>
             </div>
         </li>
+
     </ul>
   </div>
 </div>

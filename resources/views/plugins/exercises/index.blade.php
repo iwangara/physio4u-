@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{ $exercises->total() }} {{str_plural('exercise',$exercises->count())}}</h4>
+                            {{--                            <h4 class="card-title ">{{ $exercises->total() }} {{str_plural('exercise',$exercises->count())}}</h4>--}}
                             <p class="card-category"> {{ __('Here you can manage exercises') }}</p>
                         </div>
                         <div class="card-body">
@@ -26,77 +26,56 @@
                             <div class="row">
                                 <div class="col-12 text-right">
                                     @can('add_exercises')
-                                        <a href="{{ route('exercises.create') }}" class="btn btn-sm btn-primary">{{ __('Add exercise') }}</a>
+                                        <a href="{{ route('exercises.create') }}"
+                                           class="btn btn-sm btn-primary">{{ __('Add exercise') }}</a>
                                     @endcan
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table" id="exampl">
-                                    <thead class=" text-primary">
-                                    <th>
-                                        {{ __('#') }}
-                                    </th>
-                                    <th>
-                                        {{ __('Name') }}
-                                    </th>
 
-                                    
-                                    
-                                    <th>
-                                        {{ __('Added by') }}
-                                    </th>
-                                    <th class="text-right">
-                                        @can('edit_exercises','delete_exercises')
-                                            {{ __('Actions') }}
-                                        @endcan
-                                    </th>
-                                    </thead>
-                                    <tbody>
-                                    @if($exercises->total()>0)
-                                        @foreach($exercises as $index=>$exercise)
-                                            <tr>
-                                                <td>
-                                                    <strong>{{ $index+1 }}.</strong>
-                                                </td>
-                                                <td>
-                                                    {{ $exercise->name }}
-                                                </td>
+                            <div class="row">
 
-                                                <td>
-                                                    {{ $exercise->created_by }}
-                                                </td>
-                                                <td class="td-actions text-right">
-                                                    {{--                              @include('shared._actions', ['entity' => 'exercises','id'=>$exercise->id])--}}
 
+                                @if($exercises->total()>0)
+
+                                    @foreach($exercises as $index=>$exercise)
+                                        <div class="col-sm-3">
+                                            <div class="card" style="width: 10rem;">
+
+
+                                                <img class=" img-raised rounded img-fluid"
+                                                     src="{{ $exercise->getMedia('exercises')[0]->getUrl('thumb') }}"
+                                                     rel="nofollow" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <p class="card-text"><a href="{{ route('exercises.show', $exercise) }}">{{ $exercise->name}}</a></p>
                                                     <form action="{{ route('exercises.update', $exercise) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         @can('edit_exercises')
-                                                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('exercises.edit', $exercise) }}" data-original-title="" title="">
-                                                                <i class="material-icons">edit</i>
+                                                            <a rel="tooltip" class="card-link pull-left" href="{{ route('exercises.edit', $exercise) }}" data-original-title="" title="">
+                                                                Edit
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         @endcan
                                                         @can('delete_exercises')
-                                                            <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
-                                                                <i class="material-icons">close</i>
-                                                                <div class="ripple-container"></div>
-                                                            </button>
+                                                            <a href="javascript:;" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''" class="card-link pull-right">Delete</a>
+
                                                         @endcan
                                                     </form>
+{{--                                                    <a href="javascript:;" class="card-link pull-left">Edit</a>--}}
+{{--                                                    <a href="javascript:;" class="card-link pull-right">Delete</a>--}}
+                                                </div>
 
-                                                </td>
+                                            </div>
+                                        </div>
+                                    @endforeach
 
-                                            </tr>
-                                        @endforeach
-                                        {{$exercises->links()}}
-                                    @else
-                                        <td>
-                                            <p>No exercises created at the moment</p>
-                                        </td>
-                                    @endif
-                                    </tbody>
-                                </table>
+                                    {{$exercises->links()}}
+                                @else
+
+                                    <p>No exercises created at the moment</p>
+
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -104,16 +83,21 @@
             </div>
         </div>
     </div>
+
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#exampl').DataTable( {
+        $(document).ready(function () {
+            $('#exampl').DataTable({
                 "stateSave": true,
                 "ordering": true,
-                "info":true,
-                "paging":   true,
+                "info": true,
+                "paging": true,
                 "pagingType": "full_numbers"
-            } );
-        } );
+            });
+        });
     </script>
 @endsection

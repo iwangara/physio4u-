@@ -21,15 +21,16 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('exercises', 'ExerciseController');
+
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
     Route::resource('modules', 'ModulesController');
     Route::resource('parts', 'BodyPartsController');
-    Route::resource('movements', 'MovementsController');
-    Route::resource('objectives', 'ObjectivesController');
-    Route::resource('equipments', 'EquipmentsController');
-    Route::resource('muscles', 'MusclesController');
+    Route::resource('details', 'EquipmentsController');
+    Route::resource('patients', 'PatientsController');
+//    Route::resource('objectives', 'ObjectivesController');
+//    Route::resource('equipments', 'EquipmentsController');
+    Route::resource('exercises', 'ExerciseController');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

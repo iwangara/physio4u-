@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Authorizable;
 use App\Exercise;
 use Illuminate\Http\Request;
-use App\Modules;
-use App\BodyParts;
+use makbari\validator\rules;
 use App\Equipments;
-use App\Movements;
-use App\Muscles;
-use App\Objectives;
+
 
 class ExerciseController extends Controller
 {
+    use Authorizable;
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +19,8 @@ class ExerciseController extends Controller
      */
     public function index(Exercise $model)
     {
-        return view('plugins.exercises.index', ['exercises' => $model->paginate(15)]);
+        $exercises = Exercise::paginate(10);
+        return  view('plugins.exercises.index',compact('exercises'));
     }
 
     /**
@@ -31,13 +31,13 @@ class ExerciseController extends Controller
     public function create()
     {
 
-        $modules =Modules::pluck('name','id');
-        $parts =BodyParts::all();
-        $equips =Equipments::all();
-        $moves =Movements::all();
-        $muscles =Muscles::all();
-        $objs =Objectives::all();
-        return view('plugins.exercises.create',compact('modules','parts','equips','moves','muscles','objs'));
+//        $modules =Modules::pluck('name','id');
+//        $parts =BodyParts::all();
+        $equips =Equipments::pluck('name','id');
+//        $moves =Movements::all();
+//        $muscles =Muscles::all();
+//        $objs =Objectives::all();
+        return view('plugins.exercises.create',compact('equips'));
     }
 
     /**
@@ -48,7 +48,28 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-       return $request->all();
+        $rules = array(
+            'name' => 'required|min:3',
+            'description' => 'required|min:3',
+            'instruction' => 'required|min:3',
+            'modules' => 'required|min:1',
+            'start' => 'required|image|mimes:jpeg,png,jpg,gif,svg,PNG|max:20480',
+            'end' => 'image|mimes:jpeg,png,jpg,gif,svg,PNG|max:20480',
+            'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi| max:30000',
+
+        );
+
+        $this->validate($request, $rules);
+        $data = request()->except(['_token', '_method']);
+        $save = Exercise::create($data);
+        $save->addMedia($request->start)->usingName('start')->toMediaCollection('exercises');
+        if ($request->has('end')){
+            $save->addMedia($request->end)->usingName('end')->toMediaCollection('exercises');
+        }
+        if ($request->has('video')){
+        $save->addMedia($request->video)->usingName('video')->toMediaCollection('exercises');
+        }
+        return redirect()->route('exercises.index')->withStatus(__('Exercise successfully created.'));
     }
 
     /**
@@ -59,7 +80,9 @@ class ExerciseController extends Controller
      */
     public function show(Exercise $exercise)
     {
-        //
+//        $equips =Equipments::pluck('name','id');
+//        $exercises =Exercise::findorFail($id);
+        return view('plugins.exercises.show',compact('exercise'));
     }
 
     /**
@@ -68,9 +91,11 @@ class ExerciseController extends Controller
      * @param  \App\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exercise $exercise)
+    public function edit($id)
     {
-        //
+        $equips =Equipments::pluck('name','id');
+        $exercises =Exercise::findorFail($id);
+        return view('plugins.exercises.update',compact('exercises','equips'));
     }
 
     /**
@@ -80,9 +105,27 @@ class ExerciseController extends Controller
      * @param  \App\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exercise $exercise)
+   public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'name' => 'required|min:3',
+            'description' => 'required|min:3',
+            'instruction' => 'required|min:3',
+            'modules' => 'required|min:1',
+//            'start' => 'image|mimes:jpeg,png,jpg,gif,svg,PNG|max:20480',
+//            'end' => 'image|mimes:jpeg,png,jpg,gif,svg,PNG|max:20480',
+//            'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi| max:30000',
+
+        );
+
+        $this->validate($request, $rules);
+        $data = request()->except(['_token','_method']);
+        Exercise::whereId($id)->update($data);
+
+
+
+        return redirect()->route('exercises.index')->withStatus(__('Exercise successfully updated.'));
+//        return $request->all();
     }
 
     /**
@@ -93,6 +136,11 @@ class ExerciseController extends Controller
      */
     public function destroy(Exercise $exercise)
     {
-        //
+        $modules =Exercise::findOrFail($exercise->id);
+        $modules->delete();
+        return redirect()->route('exercises.index')->withStatus(__('Exercise successfully deleted.'));
+//        return $exercise;
     }
+
+
 }

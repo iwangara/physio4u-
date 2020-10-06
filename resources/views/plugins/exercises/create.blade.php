@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <form method="post" action="{{route('exercises.store')}}" autocomplete="off"
-                          class="form-horizontal">
+                          class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                         @method('post')
 
@@ -72,7 +72,7 @@
                                                 name="instruction" id="input-instruction" type="text"
                                                 placeholder="{{ __('Exercise instruction') }}"
                                                 value="{{ old('instruction') }}"
-                                                required="true" aria-required="true" rows="3"></textarea>
+                                                required="true" aria-required="true" value="{{ old('instruction') }}" rows="3"></textarea>
                                             @if ($errors->has('instruction'))
                                                 <span id="instruction-error" class="error text-danger"
                                                       for="input-instruction">{{ $errors->first('instruction') }}</span>
@@ -86,9 +86,10 @@
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('modules') ? ' has-danger' : '' }}">
 
-                                            {!! Form::select('modules[]', $modules, isset($user) ? $user->roles->pluck('id')->toArray() : null,  ['class' => 'form-control', 'multiple']) !!}
+{{--                                            {!! Form::select('modules[]', $equips->tagList, isset($user) ? $user->roles->pluck('id')->toArray() : null,  ['class' => 'form-control', 'multiple']) !!}--}}
                                             {{--                                            {!! Form::select('product_id', $groups, 1, ['class' => 'form-control']) !!}--}}
 
+                                            {!! Form::select('modules', $equips, null, ['class' => 'form-control']) !!}
                                             @if ($errors->has('modules'))
                                                 <span id="modules-error" class="error text-danger"
                                                       for="input-modules">{{ $errors->first('modules') }}</span>
@@ -96,135 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Sub Modules:') }}</label>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="card">
-                                                    <div class="card-header card-header-danger">
-                                                        <h4 class="card-title">Body Parts</h4>
 
-                                                    </div>
-                                                    <div class="card-body">
-                                                        @foreach($parts as $perm)
-
-
-                                                            <div class="col-md-3">
-                                                                <div class="checkbox">
-                                                                    <label
-                                                                        class="{{ str_contains($perm->name, 'delete') ? 'text-danger' : '' }}">
-                                                                        {!! Form::checkbox("parts[]", $perm->name, $per_found ?? '', isset($options) ? $options : []) !!} {{ $perm->name }}
-                                                                    </label>
-                                                                </div>
-
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="card">
-                                                    <div class="card-header card-header-success">
-                                                        <h4 class="card-title">Equipments</h4>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        @foreach($equips as $perm)
-
-
-                                                            <div class="col-md-3">
-                                                                <div class="checkbox">
-                                                                    <label
-                                                                        class="{{ str_contains($perm->name, 'delete') ? 'text-danger' : '' }}">
-                                                                        {!! Form::checkbox("equips[]", $perm->name, $per_found ?? '', isset($options) ? $options : []) !!} {{ $perm->name }}
-                                                                    </label>
-                                                                </div>
-
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="card">
-                                                    <div class="card-header card-header-primary">
-                                                        <h4 class="card-title">Movements</h4>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        @foreach($moves as $perm)
-
-
-                                                            <div class="col-md-3">
-                                                                <div class="checkbox">
-                                                                    <label
-                                                                        class="{{ str_contains($perm->name, 'delete') ? 'text-danger' : '' }}">
-                                                                        {!! Form::checkbox("moves[]", $perm->name, $per_found ?? '', isset($options) ? $options : []) !!} {{ $perm->name }}
-                                                                    </label>
-                                                                </div>
-
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="card">
-                                                    <div class="card-header card-header-info">
-                                                        <h4 class="card-title">Muscles</h4>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        @foreach($muscles as $perm)
-
-
-                                                            <div class="col-md-3">
-                                                                <div class="checkbox">
-                                                                    <label
-                                                                        class="{{ str_contains($perm->name, 'delete') ? 'text-danger' : '' }}">
-                                                                        {!! Form::checkbox("muscles[]", $perm->name, $per_found ?? '', isset($options) ? $options : []) !!} {{ $perm->name }}
-                                                                    </label>
-                                                                </div>
-
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="card">
-                                                    <div class="card-header card-header-danger">
-                                                        <h4 class="card-title">Objectives</h4>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        @foreach($objs as $perm)
-
-
-                                                            <div class="col-md-3">
-                                                                <div class="checkbox">
-                                                                    <label
-                                                                        class="{{ str_contains($perm->name, 'delete') ? 'text-danger' : '' }}">
-                                                                        {!! Form::checkbox("objs[]", $perm->name, $per_found ?? '', isset($options) ? $options : []) !!} {{ $perm->name }}
-                                                                    </label>
-                                                                </div>
-
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
                                 <div class="row">
                                     <div class="col-sm-10">
                                         <h3>
@@ -262,6 +135,10 @@
                                                             <div class="col-sm-6">
                                                                 <h4>
                                                                     <small>Start</small>
+                                                                    @if ($errors->has('start'))
+                                                                        <span id="start-error" class="error text-danger"
+                                                                              for="input-modules">{{ $errors->first('start') }}</span>
+                                                                    @endif
                                                                 </h4>
                                                                 <b class="caret"></b>
                                                                 <div class="col-sm-6">
@@ -271,10 +148,15 @@
                                                                     </div>
 
                                                                 </div>
+
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <h4>
                                                                     <small>End</small>
+                                                                    @if ($errors->has('start'))
+                                                                        <span id="end-error" class="error text-danger"
+                                                                              for="input-modules">{{ $errors->first('end') }}</span>
+                                                                    @endif
                                                                 </h4>
                                                                 <b class="caret"></b>
                                                                 <div class="col-sm-6">

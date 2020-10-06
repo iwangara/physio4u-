@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'client-management', 'titlePage' => __('Client Management')])
+@extends('layouts.app', ['activePage' => 'patients-management', 'titlePage' => __('Patient Management')])
 
 @section('content')
     <div class="content">
@@ -7,8 +7,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{ $clients->total() }} {{str_plural('Client',$clients->count())}}</h4>
-                            <p class="card-category"> {{ __('Here you can manage clients') }}</p>
+                            <h4 class="card-title ">{{ $patients->total() }} {{str_plural('Patient',$patients->count())}}</h4>
+                            <p class="card-category">{{str_plural('Patient',$patients->count())}} {{ __(' List') }}</p>
                         </div>
                         <div class="card-body">
                             @if (session('status'))
@@ -25,8 +25,8 @@
                             @endif
                             <div class="row">
                                 <div class="col-12 text-right">
-                                    @can('add_clients')
-                                        <a href="{{ route('clients.create') }}" class="btn btn-sm btn-primary">{{ __('Add Client') }}</a>
+                                    @can('add_patients')
+                                        <a href="{{ route('patients.create') }}" class="btn btn-sm btn-primary">{{ __('Add patient') }}</a>
                                     @endcan
                                 </div>
                             </div>
@@ -43,7 +43,10 @@
                                         {{ __('Email') }}
                                     </th>
                                     <th>
-                                        {{ __('Contact Person') }}
+                                        {{ __('Gender') }}
+                                    </th>
+                                    <th>
+                                        {{ __('Age') }}
                                     </th>
                                     <th>
                                         {{ __('Phone') }}
@@ -55,49 +58,53 @@
                                         {{ __('Added by') }}
                                     </th>
                                     <th class="text-right">
-                                        @can('edit_clients','delete_clients')
+                                        @can('edit_patients','delete_patients')
                                             {{ __('Actions') }}
                                         @endcan
                                     </th>
                                     </thead>
                                     <tbody>
-                                   @if($clients->total()>0)
-                                       @foreach($clients as $index=>$client)
+                                   @if($patients->total()>0)
+                                       @foreach($patients as $index=>$patient)
                                            <tr>
                                                <td>
                                                    <strong>{{ $index+1 }}.</strong>
                                                </td>
                                                <td>
-                                                   {{ $client->name }}
+                                                   <a href="{{ route('patients.show', $patient) }}">{{ $patient->user->name}}</a>
+
                                                </td>
                                                <td>
-                                                   {{ $client->email }}
+                                                   {{ $patient->user->email }}
                                                </td>
                                                <td>
-                                                   {{ $client->contact_person }}
+                                                   {{ $patient->gender }}
                                                </td>
                                                <td>
-                                                   {{ $client->phone }}
+                                                   {{ $patient->age }}
                                                </td>
                                                <td>
-                                                   {{ $client->area }}-{{ $client->county }}-{{ $client->sub_county }}
+                                                   {{ $patient->user->phone }}
                                                </td>
                                                <td>
-                                                   {{ $client->username }}
+                                                   {{ $patient->address }}
+                                               </td>
+                                               <td>
+                                                   {{ $patient->created_by }}
                                                </td>
                                                <td class="td-actions text-right">
-                                                   {{--                              @include('shared._actions', ['entity' => 'clients','id'=>$client->id])--}}
+                                                   {{--                              @include('shared._actions', ['entity' => 'patients','id'=>$patients->id])--}}
 
-                                                   <form action="{{ route('clients.destroy', $client) }}" method="post">
+                                                   <form action="{{ route('patients.update', $patient) }}" method="post">
                                                        @csrf
                                                        @method('delete')
-                                                       @can('edit_clients')
-                                                           <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('clients.edit', $client) }}" data-original-title="" title="">
+                                                       @can('edit_patients')
+                                                           <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('patients.edit', $patient) }}" data-original-title="" title="">
                                                                <i class="material-icons">edit</i>
                                                                <div class="ripple-container"></div>
                                                            </a>
                                                        @endcan
-                                                       @can('delete_clients')
+                                                       @can('delete_patients')
                                                            <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
                                                                <i class="material-icons">close</i>
                                                                <div class="ripple-container"></div>
@@ -109,10 +116,10 @@
 
                                            </tr>
                                        @endforeach
-                                       {{$clients->links()}}
+                                       {{$patients->links()}}
                                    @else
                                        <td>
-                                           <p>No Clients created at the moment</p>
+                                           <p>No patient created at the moment</p>
                                        </td>
                                    @endif
                                     </tbody>

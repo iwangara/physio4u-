@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'equipments-management', 'titlePage' => __('Equipments Management')])
+@extends('layouts.app', ['activePage' => 'details-management', 'titlePage' => __('Details Management')])
 
 @section('content')
     <div class="content">
@@ -7,8 +7,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{ $equipments->total() }} {{str_plural('equipment',$equipments->count())}}</h4>
-                            <p class="card-category"> {{ __('Here you can manage equipments (Example Chair)') }}</p>
+                            <h4 class="card-title ">{{ $details->total() }} {{str_plural('detail',$details->count())}}</h4>
+                            <p class="card-category"> {{ __('Here you can manage details') }}</p>
                         </div>
                         <div class="card-body">
                             @if (session('status'))
@@ -25,8 +25,8 @@
                             @endif
                             <div class="row">
                                 <div class="col-12 text-right">
-                                    @can('add_equipments')
-                                        <a href="{{ route('equipments.create') }}" class="btn btn-sm btn-primary">{{ __('Add equipment') }}</a>
+                                    @can('add_details')
+                                        <a href="{{ route('details.create') }}" class="btn btn-sm btn-primary">{{ __('Add detail') }}</a>
                                     @endcan
                                 </div>
                             </div>
@@ -39,45 +39,50 @@
                                     <th>
                                         {{ __('Name') }}
                                     </th>
-
+                                    <th>
+                                        {{ __('Tags') }}
+                                    </th>
                                     
                                     
                                     <th>
                                         {{ __('Added by') }}
                                     </th>
                                     <th class="text-right">
-                                        @can('edit_equipments','delete_equipments')
+                                        @can('edit_details','delete_details')
                                             {{ __('Actions') }}
                                         @endcan
                                     </th>
                                     </thead>
                                     <tbody>
-                                    @if($equipments->total()>0)
-                                        @foreach($equipments as $index=>$equipment)
+                                    @if($details->total()>0)
+                                        @foreach($details as $index=>$detail)
                                             <tr>
                                                 <td>
                                                     <strong>{{ $index+1 }}.</strong>
                                                 </td>
                                                 <td>
-                                                    {{ $equipment->name }}
+                                                    {{ $detail->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $detail->tagList }}
                                                 </td>
 
                                                 <td>
-                                                    {{ $equipment->created_by }}
+                                                    {{ $detail->created_by }}
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    {{--                              @include('shared._actions', ['entity' => 'equipments','id'=>$equipment->id])--}}
+                                                    {{--                              @include('shared._actions', ['entity' => 'details','id'=>$detail->id])--}}
 
-                                                    <form action="{{ route('equipments.update', $equipment) }}" method="post">
+                                                    <form action="{{ route('details.update', $detail) }}" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        @can('edit_equipments')
-                                                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('equipments.edit', $equipment) }}" data-original-title="" title="">
+                                                        @can('edit_details')
+                                                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('details.edit', $detail) }}" data-original-title="" title="">
                                                                 <i class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         @endcan
-                                                        @can('delete_equipments')
+                                                        @can('delete_details')
                                                             <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
                                                                 <i class="material-icons">close</i>
                                                                 <div class="ripple-container"></div>
@@ -89,10 +94,10 @@
 
                                             </tr>
                                         @endforeach
-                                        {{$equipments->links()}}
+                                        {{$details->links()}}
                                     @else
                                         <td>
-                                            <p>No equipments created at the moment</p>
+                                            <p>No details created at the moment</p>
                                         </td>
                                     @endif
                                     </tbody>

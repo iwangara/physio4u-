@@ -2,9 +2,12 @@
 
 namespace App;
 
+use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Equipments extends Model
 {
-    protected $fillable = ['name','created_by'];
+    use Taggable;
+    protected $fillable = ['name','created_by','tags'];
 }
