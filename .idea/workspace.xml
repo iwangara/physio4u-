@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abec5513-0f07-41fb-9db2-b997b9b00857" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/plugins/exercises/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/petrina.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/petrina.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Equipments.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Equipments.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exercise.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exercise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EquipmentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EquipmentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExerciseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExerciseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ModulesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ModulesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_04_140704_add_details_to_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_04_140704_add_details_to_users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/clients/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/patients/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/clients/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/patients/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/clients/update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/patients/update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/equipments/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/tags/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/equipments/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/tags/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/equipments/update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/tags/update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/exercises/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/exercises/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/exercises/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/exercises/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plugins/exercises/update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plugins/exercises/update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/plugins/patients/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="10" column="105" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
+            <state>
+              <caret column="50" selection-start-column="50" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -106,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="133" column="70" selection-start-line="133" selection-start-column="70" selection-end-line="133" selection-end-column="70" />
+            <state relative-caret-position="160">
+              <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
               <folding>
                 <element signature="n#li#2;n#ul#0;n#div#1;n#div#0;n#!!top" />
               </folding>
@@ -499,18 +474,18 @@
       <workItem from="1600511679373" duration="6225000" />
       <workItem from="1600783878536" duration="43671000" />
       <workItem from="1601566166321" duration="10332000" />
-      <workItem from="1601917560101" duration="24932000" />
+      <workItem from="1601917560101" duration="25182000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163462000" />
+    <option name="totallyTimeSpent" value="163712000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26545843" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26545843" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="DB Browser" order="3" />
@@ -526,7 +501,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.18851571" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.18851571" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -918,15 +893,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/plugins/patients/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="105" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
+        <state>
+          <caret column="50" selection-start-column="50" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="133" column="70" selection-start-line="133" selection-start-column="70" selection-end-line="133" selection-end-column="70" />
+        <state relative-caret-position="160">
+          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
           <folding>
             <element signature="n#li#2;n#ul#0;n#div#1;n#div#0;n#!!top" />
           </folding>

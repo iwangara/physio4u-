@@ -117,7 +117,7 @@
         </li>
         <li class="nav-item {{ ($activePage == 'patients' || $activePage == 'patients-management') ? ' active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#patientsExample" aria-expanded="true">
-                <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
+                <i class="material-icons">medical_services</i>
                 <p>{{ __('Patients Management') }}
                     <b class="caret"></b>
                 </p>
@@ -130,7 +130,7 @@
                     @can('add_patients','edit_patients', 'delete_patients')
                         <li class="nav-item{{ $activePage == 'patients-management' ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('patients.index') }}">
-                                <span class="sidebar-mini"> MM </span>
+                                <span class="sidebar-mini"> PM </span>
                                 <span class="sidebar-normal"> {{ __('Patients Management') }} </span>
                             </a>
                         </li>
